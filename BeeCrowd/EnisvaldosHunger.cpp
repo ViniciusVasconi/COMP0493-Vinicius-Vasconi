@@ -9,10 +9,8 @@ void calcularGramasTotais(int& qDiferente, int& gTotais){
   for (int i = 0; i<qDiferente; i++){
     std::cin >> tipo_aux >> grama_aux;
 
-    if (grama_aux >= 10 && grama_aux <= 100){
-      if(tipo_grama.find(tipo_aux) == tipo_grama.end() || tipo_grama[tipo_aux] < grama_aux){
+    if (grama_aux <= 100){
         tipo_grama[tipo_aux] = grama_aux;
-      }
     }
   }
   for (auto&tipo : tipo_grama){

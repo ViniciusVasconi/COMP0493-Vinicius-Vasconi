@@ -1,0 +1,22 @@
+
+  int tipo = 0, grama = 0;
+  int tipo_aux, gramas_aux;
+
+  for (int i = 0; i < qDiferente; i++){
+    std::cin >> tipo_aux;
+    std::cin >> gramas_aux;
+    
+    if(tipo_aux != tipo){
+
+      if(grama >= 10 && grama <= 100) gTotais += grama;
+      tipo = tipo_aux;
+      grama = gramas_aux;
+    }
+    else{
+      if(gramas_aux >= 10 && gramas_aux <= 100 && gramas_aux > grama){
+        grama = gramas_aux;
+      }
+    }
+  }
+  if(grama >= 10 && grama <= 100) gTotais += grama;
+}
