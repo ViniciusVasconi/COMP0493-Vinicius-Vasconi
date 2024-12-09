@@ -1,0 +1,164 @@
+
+#include <iostream>
+#include <queue>
+#include <tuple>
+
+using IOcars = std::tuple<int, char>;
+
+struct Comparador {
+    bool operator()(IOcars a, IOcars b) {
+        return std::get<0>(a) > std::get<0>(b);
+    }
+};
+
+bool verificarPossibilidade(const auto& estacionamento){
+
+}
+  
+int main(){
+
+  while (1) {
+    int numero_motoristas;
+    int numero_vagas;
+    std::cin >> numero_motoristas >> numero_vagas;
+    if (numero_vagas == 0 && numero_motoristas == 0) break;
+    for(int i = 0; i<numero_motoristas; i++){
+      std::priority_queue<IOcars, std::vector<IOcars>, Comparador> estacionamento; 
+      int chegada, saida;
+      std::cin >> chegada >> saida;
+      estacionamento.push(std::make_tuple(chegada, 'c'));
+      estacionamento.push(std::make_tuple(saida, 's'));
+    }
+    bool isPossible = verificarPossibilidade(estacionamento);
+
+  }
+
+  
+
+  return 0;
+}
+
+
+
+#include <iostream>
+#include <vector>
+#include <tuple>
+#include <queue>
+#include <stack>
+
+using tuplaCarro = std::tuple<int, int>; //identificador do motorista e hora. Serão dois desses elementos por motorista
+using estacionamento = std::priority_queue<tuplaCarro, std::vector<tuplaCarro>, Comparador>;
+using motorista = std::get<0>;
+using hora = std::get<1>;
+
+
+struct Comparador{
+  bool operator()(tuplaCarro a, tuplaCarro b){
+    return hora(a) > hora(b);
+  }
+}
+
+bool verificar_validade(estacionamento& park, bool& isValid){
+  std::stack<int> pilha;
+  for (auto car :park){
+    if (motorista(pilha.top()) > motorista(car) || pilha.isEmpty()) {
+      pilha.push(motorista(car))  
+    }
+    else if(motorista(pilha.top()) == motorista(car)){
+      pilha.pop();
+    }
+    else {
+      isValid = false;
+      break;
+    }
+  }
+}
+
+int main(){
+
+  while(1){
+
+    int N, K;
+    std::cin >> N >> K;
+
+    if(N==0 && K==0) break;
+
+    for (int i = 0; i<N; i++){
+
+      estacionamento park;
+      int chegada, saida;
+      std::cin>>chegada>>saida;
+      park.push(std::make-tuple(i, chegada));
+      park.push(std::make-tuple(i, saida));
+    }
+    bool isValid = true;
+    verificar_validade(park, isValid);
+    (isValid)?std::cout << "Sim": std::cout<<"Nao"; 
+  }
+  return 0;
+}
+
+
+
+
+#include <iostream>
+#include <vector>
+#include <tuple>
+#include <queue>
+#include <stack>
+
+using tuplaCarro = std::tuple<int, int>; // Identificador do motorista e hora
+struct Comparador {
+    bool operator()(const tuplaCarro& a, const tuplaCarro& b) {
+        return std::get<1>(a) > std::get<1>(b); // Ordem crescente pelo tempo
+    }
+};
+using estacionamento = std::priority_queue<tuplaCarro, std::vector<tuplaCarro>, Comparador>;
+
+bool verificar_validade(estacionamento& park, long int& capacidade) {
+    std::stack<int> pilha;
+
+    while (!park.empty()) {
+        auto carro = park.top(); 
+        park.pop();              
+
+        int motorista = std::get<0>(carro); 
+
+        if (pilha.empty() || pilha.top() > motorista) {
+            if(pilha.size() >= capacidade) return false;
+            else pilha.push(motorista);
+        } else if (pilha.top() == motorista) {
+            pilha.pop(); // Saída do motorista
+        } else {
+            return false; // Ordem inválida
+        }
+    }
+
+    return pilha.empty(); // Pilha deve estar vazia no final
+}
+
+int main() {
+    while (true) {
+        long int N, K;
+        std::cin >> N >> K;
+
+        if (N == 0 && K == 0) break;
+
+        estacionamento park;
+
+        for (long int i = 0; i < N; i++) {
+            int chegada, saida;
+            std::cin >> chegada >> saida;
+
+            park.push(std::make_tuple(i, chegada));
+            park.push(std::make_tuple(i, saida));
+        }
+
+        bool isValid = verificar_validade(park, K);
+        std::cout << (isValid ? "Sim" : "Nao") << std::endl;
+    }
+
+    return 0;
+}
+
+
