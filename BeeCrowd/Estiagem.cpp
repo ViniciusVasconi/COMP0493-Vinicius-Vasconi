@@ -46,7 +46,7 @@ int main(){
       total_consumo+=Y;
     }
 
-    std::string saida = "Cidade# " + std::to_string(cidade) + ":\n";
+    std::string saida = "Cidade# " + std::to_string(cidade++) + ":\n";
     exibirordenado(media_pessoa, saida);
 
     double consumo_medio = static_cast<double>(total_consumo) / total_pessoas;
