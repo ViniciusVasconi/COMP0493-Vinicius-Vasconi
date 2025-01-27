@@ -20,3 +20,37 @@
   }
   if(grama >= 10 && grama <= 100) gTotais += grama;
 }
+
+
+#include <iostream>
+#include <cmath>
+#include <vector>
+#include <concepts>
+
+void RadixSort(std::vector<int> &arr){
+  // Checks to prevent out of bounds error
+  if (arr.empty()) return;
+
+  // Finds max, the absolute value guarantees
+  //     the max digit can be negative
+  int max = arr[0];
+  for(auto& element : arr){
+    if(abs(element) > abs(max)) max = element; 
+  }
+
+  //
+  std::vector<int> subOrdem(10);
+  int expo = 1; 
+  // A expresão ceil(log10(max)) garante que passemos por
+  //   todos os digitos de todos os valores
+  for (int i = 0;i < ceil(log10(max)); i++){
+     for (auto &element : arr){
+       
+     }
+  }
+}
+
+int main{
+  
+  return 0;
+}
