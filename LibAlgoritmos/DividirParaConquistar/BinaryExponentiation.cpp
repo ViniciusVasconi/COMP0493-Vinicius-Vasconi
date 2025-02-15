@@ -15,9 +15,9 @@ int main (){
   float a;
   int b;
   while(1){
-  std::cin >> a;
-  std::cin >> b; 
-  auto c = BinaryExpo(a, b);
-  std::cout << c << std::endl;}
+    std::cin >> a;
+    std::cin >> b; 
+    auto c = BinaryExpo(a, b);
+    std::cout << c << std::endl;}
   return 0;
 }
