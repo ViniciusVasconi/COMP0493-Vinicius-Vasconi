@@ -1,0 +1,33 @@
+
+def max_diameter(N, L, H, aletas):
+    diametro_max = float('inf')
+    
+    for i in range(N - 1):
+        _, xf1, yf1 = aletas[i]
+        yi2, _, _ = aletas[i + 1]
+        
+        # Diferença de altura entre o final de uma aleta e o início da próxima
+        gap = yf1 - yi2
+        
+        # O diâmetro máximo da bolinha é o menor dos gaps
+        diametro_max = min(diametro_max, gap)
+    
+    # O diâmetro não pode ser negativo
+    diametro_max = max(0, diametro_max)
+    
+    return f"{diametro_max:.2f}"
+
+# Leitura da entrada
+def main():
+    N = int(input().strip())
+    L, H = map(int, input().strip().split())
+    
+    aletas = []
+    for _ in range(N):
+        aletas.append(tuple(map(int, input().strip().split())))
+    
+    # Calcular e imprimir o diâmetro máximo
+    print(max_diameter(N, L, H, aletas))
+
+if __name__ == "__main__":
+    main()
