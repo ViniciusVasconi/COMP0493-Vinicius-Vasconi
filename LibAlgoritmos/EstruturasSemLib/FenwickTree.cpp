@@ -26,9 +26,20 @@ void update(int indice, int newValue, vector<int>& arr) {
 }
 
 vector<int> build(const vector<int>& arr) {
-    vector<int> fenwick(arr.size() + 1, 0);  
-    for (size_t i = 0; i < arr.size(); i++) update(i + 1, arr[i], fenwick); 
+    vector<int> fenwick(arr.size() + 1, 0);
+    
+    // Copia os valores 
+    for (size_t i = 0; i < arr.size(); i++) 
+        fenwick[i + 1] = arr[i];  
+
+    // Gera propagação nas células dependentes
+    for (size_t i = 1; i < fenwick.size(); i++) {
+        size_t j = i + getLSB(i);
+        if (j < fenwick.size()) {
+            fenwick[j] += fenwick[i];
+        }
+    }
+
     return fenwick;
 }
-
 
